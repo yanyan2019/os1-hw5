@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
 
 	int socketFD, portNumber, textWritten, keyWritten, cipherRead, greetingRead;
   	struct sockaddr_in serverAddress;
-  	char cipherBuffer[MAX], buffer[50], largeBuffer[MAX*2], smallBuffer[1000];
+  	char cipherBuffer[MAX], buffer[50], largeBuffer[MAX], smallBuffer[1000];
 	char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 	int i;
 	
@@ -205,18 +205,28 @@ int main(int argc, char *argv[]) {
   	// Get cipher message from server
   	// Clear out the buffer again for reuse
   	memset(cipherBuffer, '\0', sizeof(cipherBuffer));
+	memset(smallBuffer, '\0', sizeof(smallBuffer));
+	
+	while(strstr(smallBuffer, "\n") == NULL){
+		memset(smallBuffer, '\0', sizeof(smallBuffer));
 
-  	// Read data from the socket, leaving \0 at end
-  	cipherRead = recv(socketFD, cipherBuffer, sizeof(cipherBuffer) - 1, 0); 
-  	if (cipherRead < 0){
-   		error("ENC_CLIENT: ERROR reading from socket", 0);
-  	}
-	if(cipherRead < strlen(cipherBuffer)){
-		error("ENC_CLIENT: WARNING: Not all Cipher text written to socket!\n", 0);
+  		// Read data from the socket
+  		cipherRead = recv(socketFD, smallBuffer, sizeof(smallBuffer), 0); 
+  		if (cipherRead < 0){
+   			error("ENC_CLIENT: ERROR reading from socket", 0);
+  		}
+		/*
+		if(cipherRead < strlen(smallBuffer)){
+			if(strlen(cipherBuffer) != sizeof(cipherBuffer)){
+				//error("ENC_CLIENT: WARNING: Not all Cipher text written to socket!\n", 0);
+			}
+		}
+		*/
+		strcat(cipherBuffer, smallBuffer);
 	}
 	//printf("cipherRead: %i\n", cipherRead);
   	//printf("ENC_CLIENT: I received this from the server: \"%s\"\n",cipherBuffer);
-	printf("%s\n", cipherBuffer);
+	printf("%s", cipherBuffer);
 
 	// close files
 	close(plainFile);

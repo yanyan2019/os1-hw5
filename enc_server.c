@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
       			error("ERROR on accept in enc_server",1);
     		}
 
-    		printf("ENC_SERVER: Connected to client running at host %d port %d\n", ntohs(clientAddress.sin_addr.s_addr),ntohs(clientAddress.sin_port));
+    		//printf("ENC_SERVER: Connected to client running at host %d port %d\n", ntohs(clientAddress.sin_addr.s_addr),ntohs(clientAddress.sin_port));
 
 		// fork
 		spawnpid = fork();
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]){
 				error("ENC_SERVER: ERROR reading greeting from socket in enc_server",1);
 			}
 			//printf("greetingRead: %i\n", greetingRead);	
-			printf("Enc_server: greeting from client: %s", buffer2);
+			//printf("Enc_server: greeting from client: %s", buffer2);
 			if(strstr(buffer2, "decrypt client") != NULL){
 				error("ENC_SERVER: ERROR connecting to the wrong client",1);
 			}
@@ -126,7 +126,7 @@ int main(int argc, char *argv[]){
 				}
 				strcat(largeBuffer, smallBuffer);
 			}
-    			printf("ENC_SERVER: I received this from the client: \"%s\"\n", largeBuffer);
+    			//printf("ENC_SERVER: I received this from the client: \"%s\"\n", largeBuffer);
 
 			// extract data
 			memset(keyBuffer, '\0' ,sizeof(keyBuffer));
@@ -135,7 +135,8 @@ int main(int argc, char *argv[]){
 			// encrypt data
 			memset(cipherBuffer, '\0' , sizeof(cipherBuffer));
 			encryption(cipherBuffer, keyBuffer, textBuffer);			
-
+			cipherBuffer[strlen(cipherBuffer)] = '\n';
+			
     			// Send cipher text back
     			charsRead = send(connectionSocket, cipherBuffer, strlen(cipherBuffer), 0); 
     			if (charsRead < 0){
@@ -150,7 +151,7 @@ int main(int argc, char *argv[]){
 		   default:
     			// Close the connection socket for this client
 			childpid = waitpid(-1, &childStatus, 0);
-			printf("The parent is done waiting, The pid that terminated is %d\n", childpid);
+			//printf("The parent is done waiting, The pid that terminated is %d\n", childpid);
 			fflush(stdout);	
     			close(connectionSocket); 
 			
@@ -209,6 +210,6 @@ void encryption(char * cipherBuffer, char * key, char * plaintext){
 		cipherBuffer[i] = alphabet[n2];
 		//printf("%i) alpha:%c cipher:%c  n2:%i\n", i, alphabet[n2], cipherBuffer[i], n2);
 	}
-	printf("cipherBuffer: %s\n", cipherBuffer);
+	//printf("cipherBuffer: %s\n", cipherBuffer);
 }	
 
