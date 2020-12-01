@@ -191,6 +191,7 @@ int main(int argc, char *argv[]) {
 		error("ENC_CLIENT: ERROR connecting to the wrong server",2);
 	}
 
+	//printf("after strstr\n");
 	// send all the data
 	textWritten = send(socketFD, largeBuffer, strlen(largeBuffer), 0);
         if (textWritten < 0){

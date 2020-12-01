@@ -83,28 +83,38 @@ int main(int argc, char *argv[]){
 			error("ENC_SERVER: fork() failed",1);
 			exit(1);
 		   case 0:		
-    			
+    				
     			memset(buffer2, '\0', sizeof(buffer2));
 		
 			// read greeting massage to verify the the corrent client	
 			int greetingRead = 0, read = 0;
 			greetingRead = recv(connectionSocket, buffer2, 31, 0);			
 			if(greetingRead < 0){
-				error("ENC_SERVER: ERROR reading greeting from socket in enc_server",1);
+				error("ENC_SERVER: ERROR reading greeting from socket in enc_server\n",1);
+				exit(1);
 			}
 			//printf("greetingRead: %i\n", greetingRead);	
 			//printf("Enc_server: greeting from client: %s", buffer2);
-			if(strstr(buffer2, "decrypt client") != NULL){
-				error("ENC_SERVER: ERROR connecting to the wrong client",1);
-			}
+			/*if(strstr(buffer2, "decrypt client") != NULL){
+				error("ENC_SERVER: ERROR connecting to the wrong client",2);
+				exit(2);
+			}*/
 
 			// send verify message to client
 			char messg[] = "Connecting from encrypt server\n";
 			greetingWritten = send(connectionSocket, messg, strlen(messg), 0);
 			if(greetingWritten < 0){
-				error("ENC_SERVER: ERROR writting to socket", 1);
+				error("ENC_SERVER: ERROR writting to socket\n", 1);
 			}
 			
+			//~~
+			/*
+			if(strstr(buffer2, "decrypt client") != NULL){
+                                error("ENC_SERVER: ERROR connecting to the wrong client",2);
+                                exit(2);
+                        }
+
+	*/
 
 			memset(smallBuffer, '\0', sizeof(smallBuffer));
 			memset(textBuffer, '\0',sizeof(textBuffer));
@@ -152,7 +162,7 @@ int main(int argc, char *argv[]){
     			// Close the connection socket for this client
 			childpid = waitpid(-1, &childStatus, 0);
 			//printf("The parent is done waiting, The pid that terminated is %d\n", childpid);
-			fflush(stdout);	
+			//fflush(stdout);	
     			close(connectionSocket); 
 			
     		}

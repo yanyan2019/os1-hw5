@@ -95,10 +95,11 @@ int main(int argc, char *argv[]){
 			}
 			//printf("greetingRead: %i\n", greetingRead);	
 			//printf("Enc_server: greeting from client: %s", buffer2);
+			/*
 			if(strstr(buffer2, "encrypt client") != NULL){
 				error("DEC_SERVER: ERROR connecting to the wrong client",1);
 			}
-
+			*/
 			// send verify message to client
 			char messg[] = "Connecting from decrypt server\n";
 			greetingWritten = send(connectionSocket, messg, strlen(messg), 0);
