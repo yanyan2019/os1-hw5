@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#define MAX 70000
+#define MAX 140000
 
 void extractData(char*, char* ,char*);
 void encryption(char*, char*, char*);
@@ -145,8 +145,9 @@ int main(int argc, char *argv[]){
 			// encrypt data
 			memset(cipherBuffer, '\0' , sizeof(cipherBuffer));
 			encryption(cipherBuffer, keyBuffer, textBuffer);			
-			cipherBuffer[strlen(cipherBuffer)] = '\n';
-			
+			strcat(cipherBuffer,"\n");
+			//printf("cipher text: [%s]\n", cipherBuffer);			
+
     			// Send cipher text back
     			charsRead = send(connectionSocket, cipherBuffer, strlen(cipherBuffer), 0); 
     			if (charsRead < 0){

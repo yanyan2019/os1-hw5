@@ -9,7 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#define MAX 70000
+#define MAX 140000
 
 void extractData(char*, char* ,char*);
 void decryption(char*, char*, char*);
@@ -179,7 +179,7 @@ void extractData(char* buffer, char* key, char * plaintext){
 	strcpy(plaintext, token);
 	token = strtok_r(NULL, "\n", &ptr);
 	strcpy(key, token);
-	printf("cipherText: [%s]   key: [%s]\n", plaintext, key);	
+	//printf("cipherText: [%s]   key: [%s]\n", plaintext, key);	
 }
 
 // convert input char array to int array

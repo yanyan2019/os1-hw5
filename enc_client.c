@@ -19,7 +19,7 @@
 */
 
 // max size that data can send and receive
-#define MAX 70001
+#define MAX 140000
 
 // update send data
 void updateSend(char * buffer, char* temp, int index){
@@ -219,7 +219,7 @@ int main(int argc, char *argv[]) {
 		/*
 		if(cipherRead < strlen(smallBuffer)){
 			if(strlen(cipherBuffer) != sizeof(cipherBuffer)){
-				//error("ENC_CLIENT: WARNING: Not all Cipher text written to socket!\n", 0);
+				error("ENC_CLIENT: WARNING: Not all Cipher text written to socket!", 0);
 			}
 		}
 		*/

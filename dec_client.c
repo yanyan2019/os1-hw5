@@ -20,7 +20,7 @@
 */
 
 // max size that data can send and receive
-#define MAX 70001
+#define MAX 140000
 
 // update send data
 void updateSend(char * buffer, char* temp, int index){
