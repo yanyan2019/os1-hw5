@@ -204,7 +204,7 @@ void charToInt(char* buffer, int * array, char* alphabet){
 void decryption(char * plaintext, char * key, char * ciphertext){
 	//printf("in decrytion\n");
 	char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-	int i , n = 26, n2, location[strlen(ciphertext)], keyLocation[strlen(key)];
+	int i , n = 27, n2, location[strlen(ciphertext)], keyLocation[strlen(key)];
 	char c;
 
 	//printf("cipher: %s length: %i\n", ciphertext, strlen(ciphertext));	

@@ -186,7 +186,7 @@ int main(int argc, char *argv[]) {
 	if(greetingRead < 0){
 		error("DEC_CLIENT: ERROR reading verify message from enc_server", 1);
 	}
-	printf("DEC_CLIENT: Greeting from server: %s", buffer);
+	//printf("DEC_CLIENT: Greeting from server: %s", buffer);
 
 	if(strstr(buffer, "encrypt server") != NULL){
 		error("DEC_CLIENT: ERROR connecting to the wrong server",2);
@@ -226,7 +226,7 @@ int main(int argc, char *argv[]) {
 		strcat(cipherBuffer, smallBuffer);
 	}
 	//printf("cipherRead: %i\n", cipherRead);
-  	printf("DEC_CLIENT: I received this from the server: \"%s\"\n",cipherBuffer);
+  	//printf("DEC_CLIENT: I received this from the server: \"%s\"\n",cipherBuffer);
 	printf("%s", cipherBuffer);
 
 	// close files

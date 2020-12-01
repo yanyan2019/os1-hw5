@@ -194,7 +194,7 @@ void charToInt(char* buffer, int * array, char* alphabet){
 // encryption function
 void encryption(char * cipherBuffer, char * key, char * plaintext){
 	char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-	int i , n = 26, n2, location[strlen(plaintext)], keyLocation[strlen(key)];
+	int i , n = 27, n2, location[strlen(plaintext)], keyLocation[strlen(key)];
 	char c;
 	
 	// convert key and plaintext into integer(location) array
@@ -204,9 +204,9 @@ void encryption(char * cipherBuffer, char * key, char * plaintext){
 	// calculations: add up key and plaintext location, then mod if result > 26(index)
 	for(i = 0; i < strlen(plaintext); i++){
 		n2 = location[i] + keyLocation[i];
-		if(n2 > n){
+		//if(n2 > n){
 			n2  =  n2 % n;
-		}
+		//}
 		cipherBuffer[i] = alphabet[n2];
 		//printf("%i) alpha:%c cipher:%c  n2:%i\n", i, alphabet[n2], cipherBuffer[i], n2);
 	}
