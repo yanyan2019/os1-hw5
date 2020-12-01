@@ -50,7 +50,6 @@ bool checkBadChars(char *array, char *alphabet){
 	if(count < strlen(array)-1){
 		bad = true;
 	}
-	//printf("%i\n",bad);
 	return bad;		
 }
 
@@ -70,7 +69,6 @@ void setupAddressStruct(struct sockaddr_in* address, int portNumber, char* hostn
   	address->sin_family = AF_INET;
   	// Store the port number
   	address->sin_port = htons(portNumber);
-	//printf("port in client: %i\n", ntohs(address->sin_port));
   	// Get the DNS entry for this host name
   	struct hostent* hostInfo = gethostbyname(hostname); 
   	if (hostInfo == NULL) { 
@@ -216,17 +214,8 @@ int main(int argc, char *argv[]) {
   		if (cipherRead < 0){
    			error("DEC_CLIENT: ERROR reading from socket", 0);
   		}
-		/*
-		if(cipherRead < strlen(smallBuffer)){
-			if(strlen(cipherBuffer) != sizeof(cipherBuffer)){
-				//error("ENC_CLIENT: WARNING: Not all Cipher text written to socket!\n", 0);
-			}
-		}
-		*/
 		strcat(cipherBuffer, smallBuffer);
 	}
-	//printf("cipherRead: %i\n", cipherRead);
-  	//printf("DEC_CLIENT: I received this from the server: \"%s\"\n",cipherBuffer);
 	printf("%s", cipherBuffer);
 
 	// close files
